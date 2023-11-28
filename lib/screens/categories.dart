@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mealsapp/data/dummy_data.dart';
 import 'package:mealsapp/models.dart/category.dart';
+import 'package:mealsapp/models.dart/meal.dart';
 import 'package:mealsapp/screens/meals.dart';
 import 'package:mealsapp/widgets/category_grid_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  CategoriesScreen({super.key, required this.toggleFavorites});
+  void Function(Meal meal) toggleFavorites;
   void _selectCategory(BuildContext context, Category category) {
     final filteredMeals = dummyMeals
         .where((mealsss) => mealsss.categories.contains(category.id))
@@ -13,6 +15,7 @@ class CategoriesScreen extends StatelessWidget {
 
     Navigator.of(context).push(MaterialPageRoute(
         builder: (ctx) => MealsScreen(
+            toggleFavorites: toggleFavorites,
             title: category.title,
             meals: filteredMeals))); //Navigator.push(context, route);
   }
