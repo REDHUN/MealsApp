@@ -6,10 +6,9 @@ import 'package:mealsapp/screens/meals.dart';
 import 'package:mealsapp/widgets/category_grid_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  CategoriesScreen(
-      {super.key, required this.toggleFavorites, required this.availableMeals});
+  CategoriesScreen({super.key, required this.availableMeals});
   final List<Meal> availableMeals;
-  void Function(Meal meal) toggleFavorites;
+
   void _selectCategory(BuildContext context, Category category) {
     final filteredMeals = availableMeals
         .where((mealsss) => mealsss.categories.contains(category.id))
@@ -17,7 +16,6 @@ class CategoriesScreen extends StatelessWidget {
 
     Navigator.of(context).push(MaterialPageRoute(
         builder: (ctx) => MealsScreen(
-            toggleFavorites: toggleFavorites,
             title: category.title,
             meals: filteredMeals))); //Navigator.push(context, route);
   }
